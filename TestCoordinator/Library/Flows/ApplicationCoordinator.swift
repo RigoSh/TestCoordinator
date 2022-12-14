@@ -31,22 +31,23 @@ private extension ApplicationCoordinator {
     func runLoginFlow() {
         let coordinator = coordinatorFactory.makeLoginCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
+            self?.removeDependency(coordinator)
             self?.isLogin = true
             self?.start()
-            self?.removeDependency(coordinator)
         }
-        self.addDependency(coordinator)
+        addDependency(coordinator)
         coordinator.start()
     }
 
     func runMainFlow() {
-        let coordinator = coordinatorFactory.makeMainCoordinator(router: router)
+        let (coordinator, module) = coordinatorFactory.makeTabbarCoordinator()
         coordinator.finishFlow = { [weak self, weak coordinator] in
+            self?.removeDependency(coordinator)
             self?.isLogin = false
             self?.start()
-            self?.removeDependency(coordinator)
         }
-        self.addDependency(coordinator)
+        addDependency(coordinator)
+        router.setRootModule(module, hideBar: true)
         coordinator.start()
     }
 }

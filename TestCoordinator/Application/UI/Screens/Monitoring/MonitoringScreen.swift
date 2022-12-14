@@ -1,5 +1,5 @@
 //
-//  MainScreen.swift
+//  MonitoringScreen.swift
 //  ThemoviedbOne
 //
 //  Created by ishuvalov on 13.12.2022.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MainScreen<ViewModel: MainViewModel>: View {
+struct MonitoringScreen<ViewModel: MonitoringViewModel>: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {

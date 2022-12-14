@@ -2,7 +2,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private let appFactory: AppFactory = Container()
+    private lazy var appFactory: AppFactory = Container()
     private var appCoordinator: Coordinator?
 
     var window: UIWindow?

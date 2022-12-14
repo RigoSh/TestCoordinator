@@ -27,7 +27,7 @@ class BaseCoordinator: Coordinator {
             return
         }
 
-        if let coordinator = coordinator as? BaseCoordinator, !coordinator.childCoordinators.isEmpty {
+        if let coordinator = coordinator as? BaseCoordinator {
             coordinator.childCoordinators
                 .filter { $0 !== coordinator }
                 .forEach { coordinator.removeDependency($0) }

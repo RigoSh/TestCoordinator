@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  MonitoringViewModel.swift
 //  ThemoviedbOne
 //
 //  Created by ishuvalov on 13.12.2022.
@@ -8,13 +8,13 @@
 
 import Combine
 
-protocol MainViewModel: ObservableObject {
+protocol MonitoringViewModel: ObservableObject {
     var description: String { get }
     func onBack()
     func onInfo()
 }
 
-final class MainViewModelImpl: MainViewModel {
+final class MonitoringViewModelImpl: MonitoringViewModel {
     @Published var description: String
 
     private let manager: StorageManager

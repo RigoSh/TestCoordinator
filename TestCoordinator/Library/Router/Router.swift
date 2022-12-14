@@ -58,6 +58,7 @@ final class RouterImp: Router {
         if let completion = completion {
             completions[controller] = completion
         }
+
         controller.hidesBottomBarWhenPushed = hideBottomBar
         rootController?.pushViewController(controller, animated: animated)
     }

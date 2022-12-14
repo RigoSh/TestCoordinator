@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class LoginCoordinator: BaseCoordinator {
+protocol LoginCoordinatorOutput: AnyObject {
+    var finishFlow: VoidClosure? { get set }
+}
+
+final class LoginCoordinator: BaseCoordinator, LoginCoordinatorOutput {
     var finishFlow: VoidClosure?
 
     private let screenFactory: ScreenFactory
@@ -19,13 +23,13 @@ final class LoginCoordinator: BaseCoordinator {
     }
 
     override func start() {
-        showLogin()
+        showLogin(hideBar: true)
     }
 
-    private func showLogin() {
-        let screen = screenFactory.makeLoginScreen { [weak self] in
+    private func showLogin(hideBar: Bool) {
+        let screen = screenFactory.makeLoginScreen(hideBar: hideBar) { [weak self] in
             self?.finishFlow?()
         }
-        router.setRootModule(screen, hideBar: true)
+        router.setRootModule(screen, hideBar: hideBar)
     }
 }
