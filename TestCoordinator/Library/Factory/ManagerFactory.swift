@@ -10,10 +10,15 @@ import Foundation
 
 protocol ManagerFactory {
     func makeStorageManager() -> StorageManager
+    func makeDeeplinkManager() -> DeeplinkManager
 }
 
 final class ManagerFactoryImpl: ManagerFactory {
     func makeStorageManager() -> StorageManager {
         StorageManagerImpl()
+    }
+
+    func makeDeeplinkManager() -> DeeplinkManager {
+        DeeplinkManagerImpl()
     }
 }

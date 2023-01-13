@@ -8,5 +8,5 @@
 import Foundation
 
 protocol Coordinator: AnyObject {
-    func start()
+    func start(step: Step)
 }

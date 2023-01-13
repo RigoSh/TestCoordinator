@@ -8,46 +8,65 @@
 import Foundation
 
 final class ApplicationCoordinator: BaseCoordinator {
+    var childCoordinators: [Coordinator]
+
     private let coordinatorFactory: CoordinatorFactory
     private let router: Router
 
-    private var isLogin = false
+    private var isAuthenticated = false
 
     init(router: Router, coordinatorFactory: CoordinatorFactory) {
+        self.childCoordinators = []
         self.router = router
         self.coordinatorFactory = coordinatorFactory
     }
+}
 
-    override func start() {
-        if isLogin {
-            runMainFlow()
+extension ApplicationCoordinator {
+    func start(step: Step) {
+        if isAuthenticated {
+            handle(step: step)
         } else {
-            runLoginFlow()
+            runLoginFlow(backStep: step)
         }
+    }
+
+    func handle(appStep: AppStep) {
+        switch appStep {
+        case .main:
+            runMainFlow(step: AppStep.monitoringTab)
+        case .auth:
+            runLoginFlow(backStep: AppStep.main)
+        default:
+            print("Handling unpredictable appStep: \(appStep) for \(type(of: self))")
+        }
+    }
+
+    func handle(deeplinkStep: DeeplinkStep) {
+        runMainFlow(step: deeplinkStep)
     }
 }
 
 private extension ApplicationCoordinator {
-    func runLoginFlow() {
+    func runLoginFlow(backStep: Step) {
         let coordinator = coordinatorFactory.makeLoginCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            self?.removeDependency(coordinator)
-            self?.isLogin = true
-            self?.start()
+            self?.removeCoordinator(coordinator)
+            self?.isAuthenticated = true
+            self?.start(step: backStep)
         }
-        addDependency(coordinator)
-        coordinator.start()
+        addCoordinator(coordinator)
+        coordinator.start(step: backStep)
     }
 
-    func runMainFlow() {
-        let (coordinator, module) = coordinatorFactory.makeTabbarCoordinator()
+    func runMainFlow(step: Step) {
+        let coordinator = coordinatorFactory.makeTabbarCoordinator(router: router)
         coordinator.finishFlow = { [weak self, weak coordinator] in
-            self?.removeDependency(coordinator)
-            self?.isLogin = false
-            self?.start()
+            self?.removeCoordinator(coordinator)
+            self?.isAuthenticated = false
+            self?.start(step: AppStep.main)
         }
-        addDependency(coordinator)
-        router.setRootModule(module, hideBar: true)
-        coordinator.start()
+        addCoordinator(coordinator)
+        coordinator.start(step: step)
     }
 }

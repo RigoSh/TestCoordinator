@@ -6,14 +6,24 @@
 //  Copyright © 2022 jonfir. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 protocol TabbarFactory {
-    func makeTabbarController() -> TabbarController & Presentable
+    func makeTabbarController(
+        selectTabPublisher: AnyPublisher<TabbarItem, Never>,
+        onTabSelected: @escaping (TabbarItem, UINavigationController) -> Void
+    ) -> Presentable
 }
 
 final class TabbarFactoryImpl: TabbarFactory {
-    func makeTabbarController() -> TabbarController & Presentable {
-        TabbarControllerImpl()
+    func makeTabbarController(
+        selectTabPublisher: AnyPublisher<TabbarItem, Never>,
+        onTabSelected: @escaping TabbarControllerImpl.Handler
+    ) -> Presentable {
+        TabbarControllerImpl(
+            selectTabSubject: selectTabPublisher,
+            onTabSelected: onTabSelected
+        )
     }
 }

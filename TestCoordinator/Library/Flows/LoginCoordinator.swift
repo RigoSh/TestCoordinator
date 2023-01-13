@@ -11,18 +11,20 @@ protocol LoginCoordinatorOutput: AnyObject {
     var finishFlow: VoidClosure? { get set }
 }
 
-final class LoginCoordinator: BaseCoordinator, LoginCoordinatorOutput {
+final class LoginCoordinator: Coordinator, LoginCoordinatorOutput {
+    var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
 
     private let screenFactory: ScreenFactory
     private let router: Router
 
     init(router: Router, screenFactory: ScreenFactory) {
+        self.childCoordinators = []
         self.screenFactory = screenFactory
         self.router = router
     }
 
-    override func start() {
+    func start(step: Step) {
         showLogin(hideBar: true)
     }
 

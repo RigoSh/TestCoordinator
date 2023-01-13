@@ -10,7 +10,7 @@ import Foundation
 
 protocol CoordinatorFactory {
     func makeApplicationCoordinator(router: Router) -> Coordinator
-    func makeTabbarCoordinator() -> (coordinator: Coordinator & TabbarCoordinatorOutput, toPresent: Presentable?)
+    func makeTabbarCoordinator(router: Router) -> Coordinator & TabbarCoordinatorOutput
     func makeLoginCoordinator(router: Router) -> Coordinator & LoginCoordinatorOutput
     func makeMonitoringCoordinator(router: Router) -> Coordinator & MonitoringCoordinatorOutput
     func makeProfileCoordinator(router: Router) -> Coordinator & ProfileCoordinatorOutput
@@ -29,11 +29,12 @@ final class CoordinatorFactoryImp: CoordinatorFactory {
         ApplicationCoordinator(router: router, coordinatorFactory: self)
     }
 
-    func makeTabbarCoordinator() -> (coordinator: Coordinator & TabbarCoordinatorOutput, toPresent: Presentable?) {
-        let controller = tabbarFactory.makeTabbarController()
-        let coordinator = TabbarCoordinator(coordinatorFactory: self)
-        coordinator.configure(with: controller)
-        return (coordinator, controller)
+    func makeTabbarCoordinator(router: Router) -> Coordinator & TabbarCoordinatorOutput {
+        TabbarCoordinator(
+            router: router,
+            tabbarFactory: tabbarFactory,
+            coordinatorFactory: self
+        )
     }
 
     func makeMonitoringCoordinator(router: Router) -> Coordinator & MonitoringCoordinatorOutput {

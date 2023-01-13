@@ -13,18 +13,37 @@ protocol MonitoringCoordinatorOutput: AnyObject {
 }
 
 final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput {
+    var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
 
     private let screenFactory: ScreenFactory
     private let router: Router
 
     init(router: Router, screenFactory: ScreenFactory) {
-        self.screenFactory = screenFactory
+        self.childCoordinators = []
         self.router = router
+        self.screenFactory = screenFactory
     }
 
-    override func start() {
-        showMonitoring(hideBar: true)
+    func handle(appStep: AppStep) {
+        switch appStep {
+        case .monitoring:
+            showMonitoring(hideBar: true)
+        case .monitoringInfo:
+            showInfo(hideBar: true, hideBottomBar: false)
+        default:
+            print("Handling unpredictable appStep: \(appStep) for \(type(of: self))")
+        }
+    }
+
+    func handle(deeplinkStep: DeeplinkStep) {
+        switch deeplinkStep {
+        case .monitoringInfo:
+            handle(appStep: .monitoring)
+            handle(appStep: .monitoringInfo)
+        default:
+            print("Handling unpredictable deeplinkStep: \(deeplinkStep) for \(type(of: self))")
+        }
     }
 
     private func showMonitoring(hideBar: Bool) {
@@ -33,7 +52,7 @@ final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput 
             backHandler: { [weak self] in
                 self?.finishFlow?()
             }, infoHandler: { [weak self] in
-                self?.showInfo(hideBar: true, hideBottomBar: true)
+                self?.handle(step: AppStep.monitoringInfo)
             }
         )
         router.setRootModule(screen, hideBar: hideBar)

@@ -12,18 +12,20 @@ protocol ProfileCoordinatorOutput: AnyObject {
     var finishFlow: VoidClosure? { get set }
 }
 
-final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorOutput {
+final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
+    var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
 
     private let screenFactory: ScreenFactory
     private let router: Router
 
     init(router: Router, screenFactory: ScreenFactory) {
+        self.childCoordinators = []
         self.screenFactory = screenFactory
         self.router = router
     }
 
-    override func start() {
+    func start(step: Step) {
         showProfile(hideBar: false)
     }
 

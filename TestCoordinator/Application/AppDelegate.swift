@@ -2,7 +2,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    private lazy var appFactory: AppFactory = Container()
+    private lazy var container = Container()
     private var appCoordinator: Coordinator?
 
     var window: UIWindow?
@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func runUI() {
-        let (window, coordinator) = appFactory.makeKeyWindowWithCoordinator()
+        let (window, coordinator) = container.appFactory.makeKeyWindowWithCoordinator()
         self.window = window
         self.appCoordinator = coordinator
         
         window.makeKeyAndVisible()
-        coordinator.start()
+//        coordinator.start(step: DeeplinkStep.profile)
+        coordinator.start(step: AppStep.main)
     }
 }
