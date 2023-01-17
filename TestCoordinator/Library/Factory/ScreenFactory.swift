@@ -15,7 +15,8 @@ protocol ScreenFactory {
     func makeMonitoringScreen(
         hideBar: Bool,
         backHandler: VoidClosure?,
-        infoHandler: VoidClosure?
+        infoHandler: VoidClosure?,
+        profileHandler: VoidClosure?
     ) -> UIViewController
 
     func makeInfoScreen(
@@ -40,10 +41,16 @@ final class ScreenFactoryImpl: ScreenFactory {
     func makeMonitoringScreen(
         hideBar: Bool,
         backHandler: VoidClosure?,
-        infoHandler: VoidClosure?
+        infoHandler: VoidClosure?,
+        profileHandler: VoidClosure?
     ) -> UIViewController {
         let manager = container.managerFactory.makeStorageManager()
-        let vm = MonitoringViewModelImpl(manager: manager, backHandler: backHandler, infoHandler: infoHandler)
+        let vm = MonitoringViewModelImpl(
+            manager: manager,
+            backHandler: backHandler,
+            infoHandler: infoHandler,
+            profileHandler: profileHandler
+        )
         let vc = CustomHostingController(hideBar: hideBar, content: MonitoringScreen(viewModel: vm))
         return vc
     }

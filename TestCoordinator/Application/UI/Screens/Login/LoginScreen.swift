@@ -28,17 +28,3 @@ struct LoginScreen<ViewModel: LoginViewModel>: View {
         .padding(.horizontal, 20)
     }
 }
-
-struct FFF {
-    func fffd() -> some View {
-        let vm = LoginViewModelImpl(manager: StorageManagerImpl(), loginHandler: nil)
-        return LoginScreen(viewModel: vm)
-    }
-}
-
-//extension LoginScreen {
-//    static func make() -> some View {
-//        let vm = LoginViewModelImpl(manager: StorageManagerImpl(), loginHandler: nil)
-//        return LoginScreen(viewModel: vm)
-//    }
-//}

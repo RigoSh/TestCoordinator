@@ -6,6 +6,7 @@
 //  Copyright © 2022 jonfir. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 protocol CoordinatorFactory {
@@ -13,7 +14,11 @@ protocol CoordinatorFactory {
     func makeTabbarCoordinator(router: Router) -> Coordinator & TabbarCoordinatorOutput
     func makeLoginCoordinator(router: Router) -> Coordinator & LoginCoordinatorOutput
     func makeMonitoringCoordinator(router: Router) -> Coordinator & MonitoringCoordinatorOutput
-    func makeProfileCoordinator(router: Router) -> Coordinator & ProfileCoordinatorOutput
+
+    func makeProfileCoordinator(
+        router: Router,
+        action: AnyPublisher<ProfileCoordinatorInputAction, Never>
+    ) -> Coordinator & ProfileCoordinatorOutput
 }
 
 final class CoordinatorFactoryImp: CoordinatorFactory {
@@ -45,7 +50,14 @@ final class CoordinatorFactoryImp: CoordinatorFactory {
         LoginCoordinator(router: router, screenFactory: screenFactory)
     }
 
-    func makeProfileCoordinator(router: Router) -> Coordinator & ProfileCoordinatorOutput {
-        ProfileCoordinator(router: router, screenFactory: screenFactory)
+    func makeProfileCoordinator(
+        router: Router,
+        action: AnyPublisher<ProfileCoordinatorInputAction, Never>
+    ) -> Coordinator & ProfileCoordinatorOutput {
+        ProfileCoordinator(
+            router: router,
+            screenFactory: screenFactory,
+            action: action
+        )
     }
 }

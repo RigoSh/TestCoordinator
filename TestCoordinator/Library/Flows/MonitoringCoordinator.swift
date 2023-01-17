@@ -10,11 +10,13 @@ import Foundation
 
 protocol MonitoringCoordinatorOutput: AnyObject {
     var finishFlow: VoidClosure? { get set }
+    var profileHandler: VoidClosure? { get set }
 }
 
 final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput {
     var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
+    var profileHandler: VoidClosure?
 
     private let screenFactory: ScreenFactory
     private let router: Router
@@ -53,6 +55,9 @@ final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput 
                 self?.finishFlow?()
             }, infoHandler: { [weak self] in
                 self?.handle(step: AppStep.monitoringInfo)
+            },
+            profileHandler: { [weak self] in
+                self?.profileHandler?()
             }
         )
         router.setRootModule(screen, hideBar: hideBar)

@@ -6,6 +6,7 @@
 //  Copyright © 2022 jonfir. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 protocol ProfileCoordinatorOutput: AnyObject {
@@ -16,13 +17,22 @@ final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
     var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
 
-    private let screenFactory: ScreenFactory
     private let router: Router
+    private let screenFactory: ScreenFactory
+    private let action: AnyPublisher<ProfileCoordinatorInputAction, Never>
 
-    init(router: Router, screenFactory: ScreenFactory) {
+    private var cancelBag = Set<AnyCancellable>()
+
+    init(
+        router: Router,
+        screenFactory: ScreenFactory,
+        action: AnyPublisher<ProfileCoordinatorInputAction, Never>
+    ) {
         self.childCoordinators = []
-        self.screenFactory = screenFactory
         self.router = router
+        self.screenFactory = screenFactory
+        self.action = action
+        subscribeAction()
     }
 
     func start(step: Step) {
@@ -33,4 +43,19 @@ final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
         let screen = screenFactory.makeProfileScreen(hideBar: hideBar)
         router.setRootModule(screen, hideBar: hideBar)
     }
+
+    private func subscribeAction() {
+        action
+            .sink { action in
+                switch action {
+                case .changeInfo:
+                    print("action: changeInfo")
+                }
+            }
+            .store(in: &cancelBag)
+    }
+}
+
+enum ProfileCoordinatorInputAction {
+    case changeInfo
 }

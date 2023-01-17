@@ -12,6 +12,7 @@ protocol MonitoringViewModel: ObservableObject {
     var description: String { get }
     func onBack()
     func onInfo()
+    func onProfile()
 }
 
 final class MonitoringViewModelImpl: MonitoringViewModel {
@@ -20,15 +21,18 @@ final class MonitoringViewModelImpl: MonitoringViewModel {
     private let manager: StorageManager
     private let backHandler: VoidClosure?
     private let infoHandler: VoidClosure?
+    private let profileHandler: VoidClosure?
 
     init(
         manager: StorageManager,
         backHandler: VoidClosure?,
-        infoHandler: VoidClosure?
+        infoHandler: VoidClosure?,
+        profileHandler: VoidClosure?
     ) {
         self.manager = manager
         self.backHandler = backHandler
         self.infoHandler = infoHandler
+        self.profileHandler = profileHandler
         self.description = manager.login.map { "User with login: \($0)" } ?? "undefined user"
     }
 
@@ -38,5 +42,9 @@ final class MonitoringViewModelImpl: MonitoringViewModel {
 
     func onInfo() {
         infoHandler?()
+    }
+
+    func onProfile() {
+        profileHandler?()
     }
 }

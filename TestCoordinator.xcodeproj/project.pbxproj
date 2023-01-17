@@ -22,9 +22,6 @@
 		AAADA91E294A064700A00D6B /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA91D294A064700A00D6B /* ProfileCoordinator.swift */; };
 		AAADA921294A06A600A00D6B /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA920294A06A600A00D6B /* ProfileScreen.swift */; };
 		AAADA923294A06AF00A00D6B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA922294A06AF00A00D6B /* ProfileViewModel.swift */; };
-		AAADA925294B806100A00D6B /* DeeplinkStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA924294B806100A00D6B /* DeeplinkStepper.swift */; };
-		AAADA928294B86F900A00D6B /* DeeplinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA927294B86F900A00D6B /* DeeplinkManager.swift */; };
-		AAADA92A294C4DBE00A00D6B /* Deeplinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA929294C4DBE00A00D6B /* Deeplinkable.swift */; };
 		AAADA92C294C5CB100A00D6B /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA92B294C5CB100A00D6B /* Step.swift */; };
 		AAADA92E294C78E100A00D6B /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA92D294C78E100A00D6B /* BaseCoordinator.swift */; };
 		AAFB205C2948FF2D00BE3C1B /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFB205B2948FF2D00BE3C1B /* AppFactory.swift */; };
@@ -58,9 +55,6 @@
 		AAADA91D294A064700A00D6B /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		AAADA920294A06A600A00D6B /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		AAADA922294A06AF00A00D6B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		AAADA924294B806100A00D6B /* DeeplinkStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkStepper.swift; sourceTree = "<group>"; };
-		AAADA927294B86F900A00D6B /* DeeplinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkManager.swift; sourceTree = "<group>"; };
-		AAADA929294C4DBE00A00D6B /* Deeplinkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplinkable.swift; sourceTree = "<group>"; };
 		AAADA92B294C5CB100A00D6B /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		AAADA92D294C78E100A00D6B /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		AAFB205B2948FF2D00BE3C1B /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
@@ -106,7 +100,6 @@
 		AAADA9032949091A00A00D6B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				AAADA927294B86F900A00D6B /* DeeplinkManager.swift */,
 				AAADA9042949093900A00D6B /* StorageManager.swift */,
 			);
 			path = Managers;
@@ -183,8 +176,6 @@
 		AAFB2067294901EB00BE3C1B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				AAADA929294C4DBE00A00D6B /* Deeplinkable.swift */,
-				AAADA924294B806100A00D6B /* DeeplinkStepper.swift */,
 				AAFB2068294901FD00BE3C1B /* Types.swift */,
 				AAADA92B294C5CB100A00D6B /* Step.swift */,
 			);
@@ -389,7 +380,6 @@
 				AAADA91129491AB700A00D6B /* InfoScreen.swift in Sources */,
 				AAADA9072949098500A00D6B /* ManagerFactory.swift in Sources */,
 				AAFB205E2948FF4A00BE3C1B /* CoordinatorFactory.swift in Sources */,
-				AAADA925294B806100A00D6B /* DeeplinkStepper.swift in Sources */,
 				AAADA92C294C5CB100A00D6B /* Step.swift in Sources */,
 				DC005675247E98D300D1C318 /* Container.swift in Sources */,
 				AAADA90C2949158000A00D6B /* MonitoringScreen.swift in Sources */,
@@ -403,12 +393,10 @@
 				AAFB20652949004B00BE3C1B /* ScreenFactory.swift in Sources */,
 				AAADA921294A06A600A00D6B /* ProfileScreen.swift in Sources */,
 				AAFB205C2948FF2D00BE3C1B /* AppFactory.swift in Sources */,
-				AAADA92A294C4DBE00A00D6B /* Deeplinkable.swift in Sources */,
 				AAADA90E2949159400A00D6B /* MonitoringViewModel.swift in Sources */,
 				AAADA91C2949F80F00A00D6B /* TabbarFactory.swift in Sources */,
 				AAFB20602948FF7600BE3C1B /* Presentable.swift in Sources */,
 				AAADA9052949093900A00D6B /* StorageManager.swift in Sources */,
-				AAADA928294B86F900A00D6B /* DeeplinkManager.swift in Sources */,
 				DC005644247E939A00D1C318 /* AppDelegate.swift in Sources */,
 				DC1325C7248008DE002929D6 /* Coordinator.swift in Sources */,
 			);

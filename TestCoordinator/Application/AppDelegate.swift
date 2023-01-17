@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appCoordinator = coordinator
         
         window.makeKeyAndVisible()
-//        coordinator.start(step: DeeplinkStep.profile)
-        coordinator.start(step: AppStep.main)
+        coordinator.start(step: DeeplinkStep.monitoringInfo)
+//        coordinator.start(step: AppStep.main)
     }
 }

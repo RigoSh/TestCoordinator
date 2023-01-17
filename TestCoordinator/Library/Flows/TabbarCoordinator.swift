@@ -22,8 +22,12 @@ class TabbarCoordinator: BaseCoordinator, TabbarCoordinatorOutput {
     private let tabbarFactory: TabbarFactory
 
     private var deeplinkStep: Step?
+
     /// Используется для задания выбранной вкладки табБара
     private let selectTabSubject: PassthroughSubject<TabbarItem, Never>
+
+    /// Используется для отправки действий в `ProfileCoordinator`
+    private let profileCoordinatorInputAction: PassthroughSubject<ProfileCoordinatorInputAction, Never>
 
     init(
         router: Router,
@@ -35,6 +39,7 @@ class TabbarCoordinator: BaseCoordinator, TabbarCoordinatorOutput {
         self.tabbarFactory = tabbarFactory
         self.childCoordinators = []
         self.selectTabSubject = .init()
+        self.profileCoordinatorInputAction = .init()
     }
 }
 
@@ -77,10 +82,6 @@ extension TabbarCoordinator {
 
         selectTabSubject.send(selectedTab)
         router.setRootModule(tabbarController, hideBar: true)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [selectTabSubject] in
-            selectTabSubject.send(.monitoring)
-        }
     }
 }
 
@@ -113,13 +114,20 @@ private extension TabbarCoordinator {
         coordinator.finishFlow = { [weak self] in
             self?.finishFlow?()
         }
+        coordinator.profileHandler = { [weak self] in
+            self?.selectTabSubject.send(.profile)
+            self?.profileCoordinatorInputAction.send(.changeInfo)
+        }
         addCoordinator(coordinator)
         coordinator.start(step: step)
     }
 
     func runProfileFlow(with step: Step, in navigaionController: UINavigationController) {
         let router = RouterImp(rootController: navigaionController)
-        let coordinator = coordinatorFactory.makeProfileCoordinator(router: router)
+        let coordinator = coordinatorFactory.makeProfileCoordinator(
+            router: router,
+            action: profileCoordinatorInputAction.eraseToAnyPublisher()
+        )
         addCoordinator(coordinator)
         coordinator.start(step: step)
     }

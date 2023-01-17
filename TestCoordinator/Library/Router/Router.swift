@@ -19,6 +19,7 @@ protocol Router: AnyObject {
 
     func setRootModule(_ module: Presentable?)
     func setRootModule(_ module: Presentable?, hideBar: Bool)
+    /// про present
 }
 
 final class RouterImp: Router {

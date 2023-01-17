@@ -30,15 +30,3 @@ final class Container {
         screenFactory.container = self
     }
 }
-
-//extension Container: AppFactory {
-//    func makeKeyWindowWithCoordinator() -> (UIWindow, Coordinator) {
-//        let window = UIWindow()
-//        let rootVC = UINavigationController()
-//        rootVC.navigationBar.prefersLargeTitles = false
-//        let router = RouterImp(rootController: rootVC)
-//        let cooridnator = coordinatorFactory.makeApplicationCoordinator(router: router)
-//        window.rootViewController = rootVC
-//        return (window, cooridnator)
-//    }
-//}

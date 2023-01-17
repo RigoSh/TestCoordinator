@@ -32,6 +32,15 @@ struct MonitoringScreen<ViewModel: MonitoringViewModel>: View {
                     .background(Color.blue)
                     .cornerRadius(4)
             }
+
+            Button(action: viewModel.onProfile) {
+                Text("to profile")
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(4)
+            }
         }
         .padding(.horizontal, 20)
     }
