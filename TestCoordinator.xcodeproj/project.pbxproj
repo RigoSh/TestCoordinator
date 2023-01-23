@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA3DBC05297ED24200EDB1F8 /* ProfileDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3DBC04297ED24200EDB1F8 /* ProfileDetailScreen.swift */; };
+		AA3DBC07297ED24B00EDB1F8 /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3DBC06297ED24B00EDB1F8 /* ProfileDetailViewModel.swift */; };
 		AAADA8FF294903F100A00D6B /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA8FE294903F100A00D6B /* LoginScreen.swift */; };
 		AAADA9012949041E00A00D6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA9002949041E00A00D6B /* LoginViewModel.swift */; };
 		AAADA9052949093900A00D6B /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADA9042949093900A00D6B /* StorageManager.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA3DBC04297ED24200EDB1F8 /* ProfileDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailScreen.swift; sourceTree = "<group>"; };
+		AA3DBC06297ED24B00EDB1F8 /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		AAADA8FE294903F100A00D6B /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		AAADA9002949041E00A00D6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AAADA9042949093900A00D6B /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3DBC03297EC9F100EDB1F8 /* ProfileDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AA3DBC04297ED24200EDB1F8 /* ProfileDetailScreen.swift */,
+				AA3DBC06297ED24B00EDB1F8 /* ProfileDetailViewModel.swift */,
+			);
+			path = ProfileDetail;
+			sourceTree = "<group>";
+		};
 		AAADA9022949042600A00D6B /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +287,7 @@
 				AAADA9022949042600A00D6B /* Login */,
 				AAADA90A2949157000A00D6B /* Monitoring */,
 				AAADA91F294A069600A00D6B /* Profile */,
+				AA3DBC03297EC9F100EDB1F8 /* ProfileDetail */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -386,11 +400,13 @@
 				AAADA9172949C28700A00D6B /* TabbarCoordinator.swift in Sources */,
 				AAFB2069294901FD00BE3C1B /* Types.swift in Sources */,
 				DC1325C924800A1A002929D6 /* Router.swift in Sources */,
+				AA3DBC05297ED24200EDB1F8 /* ProfileDetailScreen.swift in Sources */,
 				AAADA9012949041E00A00D6B /* LoginViewModel.swift in Sources */,
 				AAADA91329491B2800A00D6B /* InfoViewModel.swift in Sources */,
 				AAADA92E294C78E100A00D6B /* BaseCoordinator.swift in Sources */,
 				DC1325CB24800B26002929D6 /* ApplicationCoordinator.swift in Sources */,
 				AAFB20652949004B00BE3C1B /* ScreenFactory.swift in Sources */,
+				AA3DBC07297ED24B00EDB1F8 /* ProfileDetailViewModel.swift in Sources */,
 				AAADA921294A06A600A00D6B /* ProfileScreen.swift in Sources */,
 				AAFB205C2948FF2D00BE3C1B /* AppFactory.swift in Sources */,
 				AAADA90E2949159400A00D6B /* MonitoringViewModel.swift in Sources */,

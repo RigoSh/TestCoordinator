@@ -81,7 +81,7 @@ extension TabbarCoordinator {
         )
 
         selectTabSubject.send(selectedTab)
-        router.setRootModule(tabbarController, hideBar: true)
+        router.setRootModule(tabbarController, hideNavBar: true)
     }
 }
 
@@ -116,7 +116,7 @@ private extension TabbarCoordinator {
         }
         coordinator.profileHandler = { [weak self] in
             self?.selectTabSubject.send(.profile)
-            self?.profileCoordinatorInputAction.send(.changeInfo)
+            self?.profileCoordinatorInputAction.send(.profileDetail)
         }
         addCoordinator(coordinator)
         coordinator.start(step: step)

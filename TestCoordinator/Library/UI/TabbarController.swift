@@ -63,7 +63,7 @@ extension TabbarControllerImpl: UITabBarControllerDelegate {
 private extension TabbarControllerImpl {
     func configureTabBar() {
         tabBar.barTintColor = .white
-        tabBar.backgroundColor = .white
+        tabBar.backgroundColor = .lightGray
         tabBar.tintColor = .black
         tabBar.unselectedItemTintColor = .gray
     }
@@ -102,9 +102,10 @@ private extension TabbarControllerImpl {
     func createNavigationController(title: String) -> UINavigationController {
         let navController = UINavigationController()
         navController.tabBarItem.title = title
-        //        navController.tabBarItem.image = image
-        //        navController.navigationBar.prefersLargeTitles = false
-        //        rootViewController.navigationItem.title = title
+        navController.tabBarItem.setTitleTextAttributes(
+            [.font: UIFont(name: "AppleSDGothicNeo-Medium", size: 16)!],
+            for: .normal
+        )
         return navController
     }
 }

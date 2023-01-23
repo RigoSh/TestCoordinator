@@ -9,7 +9,17 @@
 import Combine
 
 protocol ProfileViewModel: ObservableObject {
+    func onDetail()
 }
 
 final class ProfileViewModelImpl: ProfileViewModel {
+    private let detailHandler: VoidClosure?
+
+    init(detailHandler: VoidClosure?) {
+        self.detailHandler = detailHandler
+    }
+
+    func onDetail() {
+        detailHandler?()
+    }
 }

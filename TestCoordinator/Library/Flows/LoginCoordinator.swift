@@ -25,13 +25,13 @@ final class LoginCoordinator: Coordinator, LoginCoordinatorOutput {
     }
 
     func start(step: Step) {
-        showLogin(hideBar: true)
+        showLogin(hideNavBar: true)
     }
 
-    private func showLogin(hideBar: Bool) {
-        let screen = screenFactory.makeLoginScreen(hideBar: hideBar) { [weak self] in
+    private func showLogin(hideNavBar: Bool) {
+        let screen = screenFactory.makeLoginScreen(hideNavBar: hideNavBar) { [weak self] in
             self?.finishFlow?()
         }
-        router.setRootModule(screen, hideBar: hideBar)
+        router.setRootModule(screen, hideNavBar: hideNavBar)
     }
 }

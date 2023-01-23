@@ -22,6 +22,7 @@ enum AppStep: Step {
     case monitoringInfo
 
     case profile
+    case profileDetail
 }
 
 enum DeeplinkStep: Step {

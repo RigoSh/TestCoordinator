@@ -12,6 +12,18 @@ struct ProfileScreen<ViewModel: ProfileViewModel>: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        Color.red
+        VStack(spacing: 20) {
+            Text("Profile info")
+
+            Button(action: viewModel.onDetail) {
+                Text("detail")
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(4)
+            }
+        }
+        .padding(.horizontal, 20)
     }
 }

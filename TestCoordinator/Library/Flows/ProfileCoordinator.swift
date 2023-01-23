@@ -13,7 +13,7 @@ protocol ProfileCoordinatorOutput: AnyObject {
     var finishFlow: VoidClosure? { get set }
 }
 
-final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
+final class ProfileCoordinator: BaseCoordinator, ProfileCoordinatorOutput {
     var childCoordinators: [Coordinator]
     var finishFlow: VoidClosure?
 
@@ -36,20 +36,44 @@ final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
     }
 
     func start(step: Step) {
-        showProfile(hideBar: false)
+        showProfile(hideNavBar: false)
     }
 
-    private func showProfile(hideBar: Bool) {
-        let screen = screenFactory.makeProfileScreen(hideBar: hideBar)
-        router.setRootModule(screen, hideBar: hideBar)
+    func handle(appStep: AppStep) {
+        switch appStep {
+        case .profileDetail:
+            showProfileDetail(hideNavBar: true, hideBottomBar: true)
+        default:
+            print("Handling unpredictable appStep: \(appStep) for \(type(of: self))")
+        }
+    }
+
+    private func showProfile(hideNavBar: Bool) {
+        let screen = screenFactory.makeProfileScreen(
+            hideNavBar: hideNavBar,
+            detailHandler: { [weak self] in
+                self?.handle(appStep: .profileDetail)
+            }
+        )
+        router.setRootModule(screen, hideNavBar: hideNavBar)
+    }
+
+    private func showProfileDetail(hideNavBar: Bool, hideBottomBar: Bool) {
+        let screen = screenFactory.makeProfileDetailScreen(
+            hideNavBar: hideNavBar,
+            backHandler: { [weak self] in
+                self?.router.popModule()
+            }
+        )
+        router.push(screen, animated: true, hideBottomBar: hideBottomBar, completion: {})
     }
 
     private func subscribeAction() {
         action
-            .sink { action in
+            .sink { [weak self] action in
                 switch action {
-                case .changeInfo:
-                    print("action: changeInfo")
+                case .profileDetail:
+                    self?.handle(appStep: .profileDetail)
                 }
             }
             .store(in: &cancelBag)
@@ -57,5 +81,5 @@ final class ProfileCoordinator: Coordinator, ProfileCoordinatorOutput {
 }
 
 enum ProfileCoordinatorInputAction {
-    case changeInfo
+    case profileDetail
 }

@@ -14,14 +14,13 @@ struct InfoScreen<ViewModel: InfoViewModel>: View {
     var body: some View {
         VStack {
             Text("Info")
-                .font(.caption)
 
             Button(action: viewModel.onBack) {
                 Text("back")
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .foregroundColor(.white)
-                    .background(Color.red)
+                    .background(Color.black)
                     .cornerRadius(4)
             }
 
@@ -30,10 +29,10 @@ struct InfoScreen<ViewModel: InfoViewModel>: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .foregroundColor(.white)
-                    .background(Color.black)
+                    .background(Color.red)
                     .cornerRadius(4)
             }
         }
-        .background(Color.green)
+        .navigationTitle("info")
     }
 }

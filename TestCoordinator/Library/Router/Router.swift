@@ -18,8 +18,7 @@ protocol Router: AnyObject {
     func popModule(animated: Bool)
 
     func setRootModule(_ module: Presentable?)
-    func setRootModule(_ module: Presentable?, hideBar: Bool)
-    /// про present
+    func setRootModule(_ module: Presentable?, hideNavBar: Bool)
 }
 
 final class RouterImp: Router {
@@ -75,15 +74,15 @@ final class RouterImp: Router {
     }
 
     func setRootModule(_ module: Presentable?) {
-        setRootModule(module, hideBar: false)
+        setRootModule(module, hideNavBar: false)
     }
 
-    func setRootModule(_ module: Presentable?, hideBar: Bool) {
+    func setRootModule(_ module: Presentable?, hideNavBar: Bool) {
         guard let controller = module?.toPresent() else {
             return
         }
         rootController?.setViewControllers([controller], animated: false)
-        rootController?.isNavigationBarHidden = hideBar
+        rootController?.isNavigationBarHidden = hideNavBar
     }
 
     private func runCompletion(for controller: UIViewController) {

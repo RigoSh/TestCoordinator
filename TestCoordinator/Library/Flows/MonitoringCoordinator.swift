@@ -30,9 +30,9 @@ final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput 
     func handle(appStep: AppStep) {
         switch appStep {
         case .monitoring:
-            showMonitoring(hideBar: true)
+            showMonitoring(hideNavBar: false)
         case .monitoringInfo:
-            showInfo(hideBar: true, hideBottomBar: false)
+            showInfo(hideNavBar: false, hideBottomBar: false)
         default:
             print("Handling unpredictable appStep: \(appStep) for \(type(of: self))")
         }
@@ -48,30 +48,31 @@ final class MonitoringCoordinator: BaseCoordinator, MonitoringCoordinatorOutput 
         }
     }
 
-    private func showMonitoring(hideBar: Bool) {
+    private func showMonitoring(hideNavBar: Bool) {
         let screen = screenFactory.makeMonitoringScreen(
-            hideBar: hideBar,
-            backHandler: { [weak self] in
+            hideNavBar: hideNavBar,
+            logoutHandler: { [weak self] in
                 self?.finishFlow?()
-            }, infoHandler: { [weak self] in
+            },
+            infoHandler: { [weak self] in
                 self?.handle(step: AppStep.monitoringInfo)
             },
             profileHandler: { [weak self] in
                 self?.profileHandler?()
             }
         )
-        router.setRootModule(screen, hideBar: hideBar)
+        router.setRootModule(screen, hideNavBar: hideNavBar)
     }
 
-    private func showInfo(hideBar: Bool, hideBottomBar: Bool) {
+    private func showInfo(hideNavBar: Bool, hideBottomBar: Bool) {
         let screen = screenFactory.makeInfoScreen(
-            hideBar: hideBar,
+            hideNavBar: hideNavBar,
             backHandler: { [weak self] in
                 self?.router.popModule()
             }, logoutHandler: { [weak self] in
                 self?.finishFlow?()
             }
         )
-        router.push(screen, hideBottomBar: hideBottomBar)
+        router.push(screen, animated: true, hideBottomBar: hideBottomBar, completion: {})
     }
 }

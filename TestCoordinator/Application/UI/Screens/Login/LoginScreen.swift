@@ -13,11 +13,16 @@ struct LoginScreen<ViewModel: LoginViewModel>: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            TextField("", text: $viewModel.loginText)
-                .background(Color.gray.cornerRadius(3))
+            HStack {
+                Text("login name")
+
+                TextField("", text: $viewModel.loginText)
+                    .textFieldStyle(.roundedBorder)
+                    .foregroundColor(.blue)
+            }
 
             Button(action: viewModel.onLogin) {
-                Text("login")
+                Text("auth")
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .foregroundColor(.white)

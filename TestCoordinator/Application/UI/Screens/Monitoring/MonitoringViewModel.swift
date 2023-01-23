@@ -10,7 +10,7 @@ import Combine
 
 protocol MonitoringViewModel: ObservableObject {
     var description: String { get }
-    func onBack()
+    func onLogout()
     func onInfo()
     func onProfile()
 }
@@ -19,25 +19,25 @@ final class MonitoringViewModelImpl: MonitoringViewModel {
     @Published var description: String
 
     private let manager: StorageManager
-    private let backHandler: VoidClosure?
+    private let logoutHandler: VoidClosure?
     private let infoHandler: VoidClosure?
     private let profileHandler: VoidClosure?
 
     init(
         manager: StorageManager,
-        backHandler: VoidClosure?,
+        logoutHandler: VoidClosure?,
         infoHandler: VoidClosure?,
         profileHandler: VoidClosure?
     ) {
         self.manager = manager
-        self.backHandler = backHandler
+        self.logoutHandler = logoutHandler
         self.infoHandler = infoHandler
         self.profileHandler = profileHandler
         self.description = manager.login.map { "User with login: \($0)" } ?? "undefined user"
     }
 
-    func onBack() {
-        backHandler?()
+    func onLogout() {
+        logoutHandler?()
     }
 
     func onInfo() {
